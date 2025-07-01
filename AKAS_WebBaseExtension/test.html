@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AKAS Polyfill – Test Viewer</title>
+
+  <!-- 1️⃣  Load the polyfill (module) -->
+
+  <script src="./akas-polyfill/pyodide/pyodide.js"></script>
+  <script type="module" src="./akas-polyfill/akas-autoload.js"></script>
+
+  <!-- simple styling -->
+  <style>
+    body   { font-family:sans-serif; text-align:center; margin:2rem; }
+    img    { max-width:90%; border:1px solid #ccc; box-shadow:0 2px 6px #0002; }
+  </style>
+</head>
+<body>
+
+  <h1>AKAS Image Test</h1>
+
+  <!-- 2️⃣  Use a .akas file exactly like PNG/JPG -->
+  <img src="./demo.akas" alt="">
+
+  <p>If you see the picture above, the polyfill is working.</p>
+
+</body>
+</html>
