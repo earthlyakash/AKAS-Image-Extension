@@ -1,0 +1,16 @@
+# AKAS Polyfill – Web Dependencies
+
+The browser bundle is *self‑contained*. No npm install is required.
+
+You only need to place the **Pyodide full web build** (v0.25.1) in:
+
+    akas-polyfill/pyodide/
+
+Directory should contain at minimum:
+  - pyodide.js
+  - pyodide.asm.js
+  - pyodide.asm.wasm
+  - python_stdlib.zip
+  - *.data files supplied by the Pyodide release
+
+
