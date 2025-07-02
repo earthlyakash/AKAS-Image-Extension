@@ -106,7 +106,7 @@ Then open:
 
 ## 📄 License
 
-MIT License © 2025 Akash Kumar  
+Free License © 2025 Akash Kumar  
 You may reuse, integrate, modify freely.
 
 ---
