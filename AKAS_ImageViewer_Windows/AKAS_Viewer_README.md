@@ -128,16 +128,16 @@ README.md                # (this file)
 
 ## 🗺️ Roadmap
 
-- [ ] AVIF compression option  
+- [ ] Compression option  
 - [ ] Photoshop **Save as AKAS** plug‑in  
 - [ ] Electron one‑click desktop installer  
 - [ ] Publish `akas-polyfill` on NPM  
 
 ---
 
-## 📝 License
+## 📝 License Free
 
-MIT License © 2025 **Akash Kumar**
+Free License © 2025 **Akash Kumar**
 
 > Use it, fork it, embed it — just keep the credits.
 
