@@ -102,7 +102,7 @@ displayRGBA(frames[0].rgba.data(), frames[0].width, frames[0].height);
 
 ## 8. Roadmap
 
-- 🔜 **AVIF compression** option (flag 3)  
+- 🔜 **Compression** option (flag 3)  
 - 🔜 **Layered AKAS** for PSD‑style assets  
 - 🔜 CLI batch converter (`akascli`)  
 
@@ -110,12 +110,12 @@ displayRGBA(frames[0].rgba.data(), frames[0].width, frames[0].height);
 
 ## 9. License & Credits
 
-*Core spec & reference code* – © 2025 **Akash Kumar**, MIT License  
+*Core spec & reference code* – © 2025 **Akash Kumar**, Free License  
 Inspired by PNG, WebP, and the need for a flexible hybrid format.
 
 ---
 
 ## 10. Contact
 
-*Email:* akas.dev@protonmail.com  
-*GitHub:* [Akash‑Kumar](https://github.com/your-handle)
+*Email:* earthlyakash@gmail.com  
+*GitHub:* [Akash‑Kumar](https://github.com/earthlyakash)
