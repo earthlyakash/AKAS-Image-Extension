@@ -104,11 +104,10 @@ const { metadata, frames } = AkasDecoder.decode(arrayBuf);
 | Tool | Status | Description |
 |------|--------|-------------|
 | **AKAS Viewer** | ✅ Release v1.0 | Double‑click viewer with drag‑n‑drop |
-|download link : https://drive.google.com/file/d/1FsRfFogTr_npraXKV7aRqASSOu8f7WPf/view?usp=sharing
-
+|download link : https://drive.google.com/file/d/1FsRfFogTr_npraXKV7aRqASSOu8f7WPf/view?usp=sharing |
 | **AKAS Converter** | ✅ Release v1.0 | Batch convert PNG/JPG ⇢ AKAS |
-|download link : https://drive.google.com/file/d/1ZlAgU_SLqCZ78pfHvKT9aAoemTEVdiqG/view?usp=sharing
-|------|--------|-------------|
+|download link : https://drive.google.com/file/d/1ZlAgU_SLqCZ78pfHvKT9aAoemTEVdiqG/view?usp=sharing |
+
 
 ---
 
