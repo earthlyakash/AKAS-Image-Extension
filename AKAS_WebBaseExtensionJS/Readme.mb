@@ -1,0 +1,66 @@
+/**
+ * AKAS Web Viewer & Encoder Toolkit
+ *
+ * A pure JavaScript toolkit to view, decode, and encode `.akas` image files directly in the browser—no Python, no plugins, no server-side logic.
+ *
+ * 🚀 Features:
+ * - Preview `.akas` files just like <img src="file.akas">
+ * - View static and animated `.akas` files
+ * - Drag-and-drop UI for testing and conversions
+ * - Fully client-side, no backend or install needed
+ * - Works in all modern browsers
+ *
+ * 📂 Project Structure:
+ * ├── index.html
+ * ├── akasEncoder.js
+ * ├── akasDecoder.js
+ * ├── akasViewer.js
+ * ├── sample_static.akas
+ * └── sample_animated.akas
+ *
+ * 🛠️ Setup Guide (For Developers):
+ * 1. Use VS Code + Live Server
+ *    - Install "Live Server" extension
+ *    - Right-click `index.html` → Open with Live Server
+ *    - Access at: http://127.0.0.1:5500/
+ *
+ * 2. Or use Node.js:
+ *    - npm install -g http-server
+ *    - http-server . -p 8080
+ *    - Access at: http://localhost:8080/
+ *
+ * 🔹 How to Use:
+ *
+ * Example: Auto-load AKAS file
+ * <akas-img src="sample_static.akas"></akas-img>
+ *
+ * Example: Encode an image into AKAS
+ * import { AkasEncoder } from './akasEncoder.js';
+ * const bmp = await createImageBitmap(file);
+ * const blob = await AkasEncoder.encode([{ bitmap: bmp }], { author: 'You' });
+ *
+ * Example: Decode an AKAS file
+ * import { AkasDecoder } from './akasDecoder.js';
+ * const buf = await file.arrayBuffer();
+ * const result = AkasDecoder.decode(buf);
+ *
+ * 💡 Use Cases:
+ * - Visualizing .akas in-browser
+ * - AI image pipelines
+ * - 3D previews
+ * - Web-based photo compression
+ *
+ * 🧱 AKAS Format:
+ * - Magic: 'AKAS'
+ * - Version: 1 byte
+ * - Compression: 1 byte
+ * - isAnim: 1 byte (0 or 1)
+ * - Frame Count: uint16
+ * - Metadata: UTF-8 JSON
+ * - Frames: width, height, duration
+ *
+ *
+ * 📬 Contact:
+ * - GitHub: https://github.com/earthlyakash
+ * - Email: earthlyakash@gmail.com
+ */

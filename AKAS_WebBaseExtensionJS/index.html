@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AKAS JS Demo</title>
+  <script type="module" src="viewer.js"></script>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 2rem; }
+    img, canvas { border: 2px solid #ccc; max-width: 320px; margin: 1rem; }
+    #drop { padding: 40px; border: 3px dashed #666; text-align: center; }
+  </style>
+</head>
+<body>
+  <h1>AKAS JavaScript Encoder / Decoder Demo</h1>
+
+  <!-- auto‑loaded example (works only when served over http://) -->
+  <h2>Auto‑load:</h2>
+  <img id="hardwired" alt="auto demo">
+
+  <!-- drag‑and‑drop area -->
+  <h2>Drag &amp; Drop:</h2>
+  <div id="drop">Drop .akas here</div>
+  <div id="results"></div>
+
+  <script type="module">
+    import { previewAkas } from './viewer.js';
+
+    // 1) auto‑load demo
+    previewAkas('3 Second Video_ani.akas', document.getElementById('hardwired'))
+      .catch(e => console.error('Auto‑load failed:', e));
+
+    // 2) drag‑and‑drop
+    const drop = document.getElementById('drop');
+    const res  = document.getElementById('results');
+
+    drop.addEventListener('dragover', e => { e.preventDefault(); });
+    drop.addEventListener('drop', e => {
+      e.preventDefault();
+      [...e.dataTransfer.files].forEach(file => {
+        if (!file.name.endsWith('.akas')) return;
+        const holder = document.createElement('img');
+        res.appendChild(holder);
+        previewAkas(file, holder)
+          .catch(err => { holder.alt = 'Decode error'; console.error(err); });
+      });
+    });
+  </script>
+</body>
+</html>
