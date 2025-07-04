@@ -127,7 +127,7 @@ Please keep code **ES Module compliant** and write unit tests.
 
 ## 📄 License Free
 
-Free © 2025 — Built on the original `.akas` format by **[Your Name]**
+Free © 2025 — Built on the original `.akas` format by **[Akash Kumar]**
 
 ---
 
