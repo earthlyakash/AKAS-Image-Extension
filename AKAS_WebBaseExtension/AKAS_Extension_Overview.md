@@ -118,4 +118,4 @@ Inspired by PNG, WebP, and the need for a flexible hybrid format.
 ## 10. Contact
 
 *Email:* earthlyakash@gmail.com  
-*GitHub:* [Akash‑Kumar](https://github.com/earthlyakash)
+*GitHub:* https://github.com/earthlyakash
