@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Fashion Search Results – Maayra Shop</title>
+  <!-- AKAS viewer (requires viewer.js + akas_codec.js in same folder) -->
+  <script type="module" src="viewer.js"></script>
+  <style>
+    :root {
+      --primary: #111;
+      --accent: #e91e63;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: Arial, Helvetica, sans-serif; background: #f7f7f7; }
+
+    /* ——— header ——— */
+    header {
+      background: #fff;
+      padding: 1rem 2rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,.05);
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    header h1 { font-size: 1.5rem; color: var(--primary); white-space: nowrap; }
+    header input[type=search] {
+      flex: 1;
+      padding: .6rem 1rem;
+      border: 1px solid #ddd;
+      border-radius: 999px;
+      font-size: 1rem;
+    }
+
+    /* ——— results grid ——— */
+    main {
+      padding: 2rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1.5rem;
+    }
+    .card {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,.05);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform .2s ease;
+    }
+    .card:hover { transform: translateY(-3px); }
+
+    /* image / canvas (akas) */
+    .card img,
+    .card canvas {
+      width: 100%;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+    }
+
+    /* details */
+    .details {
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: .4rem;
+    }
+    .name  { font-weight: 600; font-size: 1rem;  color: var(--primary); }
+    .price { color: var(--accent); font-weight: 700; font-size: 1.1rem; }
+
+    /* dark‑mode support */
+    @media (prefers-color-scheme: dark) {
+      body                 { background: #121212; }
+      header, .card        { background: #1e1e1e; }
+      header h1, .name     { color: #fff; }
+      header input[type=search] {
+        background: #2b2b2b;
+        border-color: #444;
+        color: #fff;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Maayra Fashion</h1>
+  <!-- Users can edit the search query → -->
+  <input type="search" placeholder="Search for dresses, tops, shoes…" value="summer dresses">
+</header>
+
+<main id="results">
+  <!-- 🔺 Duplicate / edit these cards as needed. Replace data‑src with your own .akas files. -->
+  <article class="card">
+    <img class="akas" data-src="sample1.akas" alt="Floral Summer Dress">
+    <div class="details">
+      <span class="name">Floral Summer Dress</span>
+      <span class="price">₹1,299</span>
+    </div>
+  </article>
+
+  <article class="card">
+    <img class="akas" data-src="sample2.akas" alt="Denim Jacket">
+    <div class="details">
+      <span class="name">Denim Jacket</span>
+      <span class="price">₹2,499</span>
+    </div>
+  </article>
+
+  <article class="card">
+    <img class="akas" data-src="sample3.akas" alt="White Sneakers">
+    <div class="details">
+      <span class="name">White Sneakers</span>
+      <span class="price">₹1,999</span>
+    </div>
+  </article>
+</main>
+
+<script type="module">
+  import { previewAkas } from './viewer.js';
+
+  // Initialise every <img class="akas"> element:
+  const tasks = [...document.querySelectorAll('img.akas')].map(img =>
+    previewAkas(img.dataset.src, img)
+  );
+
+  /* Optional: wait for all to finish (useful for prod analytics) */
+  Promise.allSettled(tasks).catch(console.error);
+</script>
+
+</body>
+</html>
