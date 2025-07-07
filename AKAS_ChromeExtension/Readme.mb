@@ -1,0 +1,106 @@
+# 🔹 Save Image as .akas – Chrome Extension
+
+This Chrome extension adds a convenient **“Save image as .akas”** option when you right-click on any image on the web. It allows you to directly convert and download images in `.akas` format using a built-in WebP-based encoder.
+
+---
+
+## 📦 Features
+
+- ✅ Adds **right-click option**: “Save image as .akas”
+- ✅ Automatically **fetches and encodes** the image to `.akas` format
+- ✅ Uses an **offscreen rendering pipeline** for efficient processing
+- ✅ Supports **.akas codec** integration with your own encoder logic
+- ✅ Works on all image types and any website
+
+---
+
+## 🛠 How It Works
+
+1. You right-click an image and choose **“Save image as .akas”**.
+2. The extension fetches the image and renders it into a canvas using an **offscreen document**.
+3. The image is convert image to the `encodeAkas()` function defined in `akas_codec.js`.
+4. The final `.akas` binary blob is downloaded as a file via the Chrome Downloads API.
+
+---
+
+
+---
+
+## 💡 Use Cases
+
+- 🧵 **Custom media formats** – perfect if your project requires `.akas` image containers
+- 🛠️ **Visual data compression experiments proprietary wrapping
+- 📁 **One-click downloads** of encoded image data from any website
+
+
+---
+
+## 🧪 Requirements
+
+- Chrome 100+ (or any Chromium-based browser)
+- Manifest V3 support (uses `offscreenDocuments` API)
+
+---
+
+## 🧱 Credits
+
+- Built by [Akash Kumar]  
+- `akas_codec.js` logic is user-supplied and can be replaced with any compatible encoder
+
+---
+
+
+💻 How to Install the Extension Offline (No Internet Required)
+If you’ve downloaded the .zip file and want to install the "Save Image as .akas" extension manually without internet access, follow these simple steps:
+
+📦 Step 1: Extract the ZIP
+Right-click the ZIP file (AKAS_ChromeExtension.zip).
+
+Choose “Extract All” or use any unzip tool (WinRAR, 7-Zip, etc.).
+
+Extract it to any location on your computer, like your Desktop or Downloads folder.
+
+🧩 Step 2: Open Chrome Extensions Page
+Open Google Chrome.
+
+In the address bar, type:
+
+arduino
+Copy
+Edit
+chrome://extensions
+Press Enter.
+
+⚙️ Step 3: Enable Developer Mode
+On the top-right corner of the Extensions page, turn on the toggle labeled:
+
+nginx
+Copy
+Edit
+Developer mode
+This allows you to manually install extensions from your computer.
+
+📂 Step 4: Load the Unpacked Extension
+Click the "Load unpacked" button.
+
+Browse to the folder where you extracted the extension (e.g., AKAS_ChromeExtension).
+
+Select the folder and click "Select Folder" (or "Open").
+
+✅ The extension will now appear in your Chrome toolbar with the “AK” icon, and it's ready to use!
+
+✅ What You Can Do Now
+Right-click any image → Save image as .akas
+
+It will convert the image and download it in .akas format
+
+📝 Note
+This extension works fully offline after installation.
+
+You do not need to be connected to the internet to use the conversion.
+
+
+
+## 📜 License
+
+Free License – use freely, modify as needed.
