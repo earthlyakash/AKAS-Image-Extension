@@ -43,7 +43,7 @@ def decode_akas(file_path, save=True):
                     img = Image.open(io.BytesIO(data)).convert("RGBA")
                 except Exception as e:
                     print(f"❌ Failed to decode frame {i+1}: {e}")
-                    continue
+                    continue    
             else:
                 print("❌ Unsupported compression type.")
                 return None

@@ -1,6 +1,5 @@
-# akas_converter.py ⓒ Akash 2025
 import os, mimetypes, tkinter as tk
-from tkinter import filedialog, messagebox
+from tkinter import filedialog
 from PIL import Image
 from akas_encoder import encode_image, encode_video
 from akas_decoder import decode_akas
@@ -15,36 +14,35 @@ def is_animated_gif(path):
     except Exception:
         return False
 
-# ---------- Convert to .akas ----------
-def to_akas(path, out_dir, log):
+def to_akas(path, out_dir, log, quality):
     name, ext = os.path.splitext(os.path.basename(path))
     ext = ext.lower()
     meta = {"creator": "Akash Kumar", "source_file": path}
+    q = int(quality * 10)
 
     try:
         if ext == ".gif" and is_animated_gif(path):
             out = os.path.join(out_dir, f"{name}_ani.akas")
-            encode_image(path, out, meta)
+            encode_image(path, out, meta, quality=q)
 
         elif is_video_file(path):
             out = os.path.join(out_dir, f"{name}_ani.akas")
-            encode_video(path, out, meta)
+            encode_video(path, out, meta, quality=q)
 
         elif ext != ".akas":
             out = os.path.join(out_dir, f"{name}.akas")
-            encode_image(path, out, meta)
+            encode_image(path, out, meta, quality=q)
 
         log.insert(tk.END, f"✅ Converted to: {os.path.basename(out)}\n")
     except Exception as e:
         log.insert(tk.END, f"❌ Failed to convert to .akas: {e}\n")
 
-# ---------- Convert from .akas ----------
 def from_akas(path, out_dir, log, selected_format):
     name, ext = os.path.splitext(os.path.basename(path))
     ext = ext.lower()
 
     try:
-        if ext not in (".akas", ".akas"):
+        if ext != ".akas":
             raise Exception("Not a .akas file")
 
         meta_out, frames = decode_akas(path, save=False)
@@ -58,26 +56,20 @@ def from_akas(path, out_dir, log, selected_format):
             durs = [f[1] for f in frames]
             out = os.path.join(out_dir, f"{name}.gif")
             imgs[0].save(out, save_all=True, append_images=imgs[1:], duration=durs, loop=0)
-
         else:
             img = frames[0][0].convert("RGBA")
             out = os.path.join(out_dir, f"{name}.{selected_format}")
-
             if selected_format in ("jpg", "jpeg", "bmp"):
-                bg = Image.new("RGB", img.size, (255, 255, 255))  # white bg
-                bg.paste(img, mask=img.split()[-1])  # apply alpha as mask
+                bg = Image.new("RGB", img.size, (255, 255, 255))
+                bg.paste(img, mask=img.split()[-1])
                 bg.save(out)
             else:
                 img.save(out)
 
         log.insert(tk.END, f"✅ Converted to: {os.path.basename(out)}\n")
-
     except Exception as e:
         log.insert(tk.END, f"❌ Failed: {e}\n")
 
-
-
-# ---------- GUI ----------
 def launch_gui():
     root = tk.Tk()
     root.title("🖼️ AKASH File Converter")
@@ -90,17 +82,22 @@ def launch_gui():
     frame = tk.Frame(root, bg="#f0f0f0")
     frame.pack(fill="both", expand=True, padx=10)
 
-    # LEFT PANEL: TO .akas
+    # LEFT PANEL
     left = tk.LabelFrame(frame, text="📤 Convert TO .akas", font=("Arial", 12, "bold"), width=400, bg="#ffffff")
     left.pack(side="left", fill="both", expand=True, padx=10, pady=10)
 
     log1 = tk.Text(left, height=16, width=50, bg="#fefefe")
     log1.pack(pady=10)
 
+    q_label = tk.Label(left, text="Compression Quality (1–10):", bg="#ffffff")
+    q_label.pack()
+    q_val = tk.IntVar(value=6)
+    tk.Scale(left, from_=1, to=10, orient="horizontal", variable=q_val, bg="#ffffff").pack()
+
     def single_to_akas():
         p = filedialog.askopenfilename(title="Select image / video")
         if p:
-            to_akas(p, os.path.dirname(p), log1)
+            to_akas(p, os.path.dirname(p), log1, q_val.get())
 
     def bulk_to_akas():
         d = filedialog.askdirectory(title="Select folder with images / videos")
@@ -112,19 +109,20 @@ def launch_gui():
         for f in os.listdir(d):
             p = os.path.join(d, f)
             if os.path.isfile(p) and os.path.splitext(f)[1].lower() in valid:
-                to_akas(p, out_d, log1)
+                to_akas(p, out_d, log1, q_val.get())
 
         log1.insert(tk.END, f"\n✅ All saved to: {out_d}\n")
 
     tk.Button(left, text="Convert Single File", command=single_to_akas, width=32).pack(pady=4)
     tk.Button(left, text="Convert Folder (Bulk)", command=bulk_to_akas, width=32).pack(pady=4)
 
-    # RIGHT PANEL: FROM .akas
+    # RIGHT PANEL
     right = tk.LabelFrame(frame, text="📥 Convert FROM .akas", font=("Arial", 12, "bold"), width=400, bg="#ffffff")
     right.pack(side="right", fill="both", expand=True, padx=10, pady=10)
 
     log2 = tk.Text(right, height=16, width=50, bg="#fefefe")
     log2.pack(pady=10)
+
     format_label = tk.Label(right, text="Convert to format:", bg="#ffffff", font=("Arial", 10))
     format_label.pack()
 
@@ -132,7 +130,6 @@ def launch_gui():
     format_options = [".png", ".jpg", ".jpeg", ".bmp", ".webp", ".tiff", ".avif", ".gif"]
     format_menu = tk.OptionMenu(right, format_var, *format_options)
     format_menu.pack(pady=4)
-
 
     def single_from_akas():
         p = filedialog.askopenfilename(title="Select .akas file")
@@ -147,11 +144,10 @@ def launch_gui():
 
         for f in os.listdir(d):
             p = os.path.join(d, f)
-            if os.path.isfile(p) and os.path.splitext(f)[1].lower() in (".akas", ".akas"):
+            if os.path.isfile(p) and os.path.splitext(f)[1].lower() == ".akas":
                 from_akas(p, out_d, log2, format_var.get())
 
         log2.insert(tk.END, f"\n✅ All saved to: {out_d}\n")
-
 
     tk.Button(right, text="Convert Single .akas", command=single_from_akas, width=32).pack(pady=4)
     tk.Button(right, text="Convert Folder (Bulk)", command=bulk_from_akas, width=32).pack(pady=4)
